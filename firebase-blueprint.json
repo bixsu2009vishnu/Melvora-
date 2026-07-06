@@ -1,0 +1,314 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based access control and status.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["User", "Moderator", "Admin", "Owner"] },
+        "status": { "type": "string", "enum": ["active", "banned"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "displayName", "role", "status"]
+    },
+    "Song": {
+      "title": "Song",
+      "description": "Metadata for individual tracks available on the platform.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "artistId": { "type": "string" },
+        "artistName": { "type": "string" },
+        "albumId": { "type": "string" },
+        "albumName": { "type": "string" },
+        "audioUrl": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "duration": { "type": "number" },
+        "genre": { "type": "string" },
+        "playsCount": { "type": "number" },
+        "likesCount": { "type": "number" },
+        "lyrics": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "scheduledAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "artistName", "audioUrl", "coverUrl", "duration", "genre"]
+    },
+    "Album": {
+      "title": "Album",
+      "description": "Music album collection data.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "artistId": { "type": "string" },
+        "artistName": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "genre": { "type": "string" },
+        "releaseYear": { "type": "number" },
+        "songsCount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "artistName", "coverUrl", "genre"]
+    },
+    "Artist": {
+      "title": "Artist",
+      "description": "Music artist metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "bio": { "type": "string" },
+        "monthlyListeners": { "type": "number" },
+        "verified": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "photoUrl", "verified"]
+    },
+    "Playlist": {
+      "title": "Playlist",
+      "description": "User created music playlists.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "isPublic": { "type": "boolean" },
+        "songIds": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "ownerId", "ownerName", "isPublic", "songIds"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "Track liked by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "songId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "songId", "createdAt"]
+    },
+    "History": {
+      "title": "History",
+      "description": "User listening history record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "songId": { "type": "string" },
+        "playedAt": { "type": "string" },
+        "durationPlayed": { "type": "number" }
+      },
+      "required": ["id", "userId", "songId", "playedAt"]
+    },
+    "AdConfig": {
+      "title": "AdConfig",
+      "description": "Platform global ad configuration.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "adsEnabled": { "type": "boolean" },
+        "admobId": { "type": "string" },
+        "bannerAdsEnabled": { "type": "boolean" },
+        "interstitialAdsEnabled": { "type": "boolean" },
+        "rewardedAdsEnabled": { "type": "boolean" }
+      },
+      "required": ["id", "adsEnabled"]
+    },
+    "HomepageConfig": {
+      "title": "HomepageConfig",
+      "description": "Homepage layout, banners and texts.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bannerUrl": { "type": "string" },
+        "tagline": { "type": "string" },
+        "announcement": { "type": "string" },
+        "logoUrl": { "type": "string" }
+      },
+      "required": ["id", "tagline"]
+    },
+    "PaymentRecord": {
+      "title": "PaymentRecord",
+      "description": "Subscription purchase receipts and history log.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "planId": { "type": "string" },
+        "planName": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "status": { "type": "string", "enum": ["succeeded", "failed", "refunded"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "userEmail", "planId", "amount", "status", "createdAt"]
+    },
+    "PricingCoupon": {
+      "title": "PricingCoupon",
+      "description": "Subscription discount coupon code.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "discountPercent": { "type": "number" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "code", "discountPercent", "active"]
+    },
+    "CommunityPost": {
+      "title": "CommunityPost",
+      "description": "Social community forum posts.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "userPhotoURL": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" }
+      },
+      "required": ["id", "userId", "content", "createdAt"]
+    },
+    "CommunityComment": {
+      "title": "CommunityComment",
+      "description": "Social community comments under posts.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "postId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "postId", "userId", "content", "createdAt"]
+    },
+    "CommunityChatMessage": {
+      "title": "CommunityChatMessage",
+      "description": "Global community chatroom messages.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "content", "createdAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "User activity log for security auditing and tracking.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "userEmail", "action", "details", "timestamp"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "User feedback and bug report submissions.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profile collection"
+    },
+    "songs/{songId}": {
+      "schema": "Song",
+      "description": "Global songs library"
+    },
+    "albums/{albumId}": {
+      "schema": "Album",
+      "description": "Global albums"
+    },
+    "artists/{artistId}": {
+      "schema": "Artist",
+      "description": "Global music artists"
+    },
+    "playlists/{playlistId}": {
+      "schema": "Playlist",
+      "description": "User playlists"
+    },
+    "favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "User liked/favorite songs"
+    },
+    "history/{historyId}": {
+      "schema": "History",
+      "description": "Listening history for analytics"
+    },
+    "adConfig/{configId}": {
+      "schema": "AdConfig",
+      "description": "System-wide ad configuration"
+    },
+    "homepageConfig/{configId}": {
+      "schema": "HomepageConfig",
+      "description": "System-wide homepage banners and text"
+    },
+    "payments/{paymentId}": {
+      "schema": "PaymentRecord",
+      "description": "Purchase records database"
+    },
+    "coupons/{couponId}": {
+      "schema": "PricingCoupon",
+      "description": "Premium pricing coupons"
+    },
+    "posts/{postId}": {
+      "schema": "CommunityPost",
+      "description": "Community posts feed"
+    },
+    "comments/{commentId}": {
+      "schema": "CommunityComment",
+      "description": "Post comment replies"
+    },
+    "chat_messages/{messageId}": {
+      "schema": "CommunityChatMessage",
+      "description": "Global community chatroom messages"
+    },
+    "activity_logs/{logId}": {
+      "schema": "ActivityLog",
+      "description": "User activity log collection for auditing"
+    },
+    "feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "Feedback and bug reports submitted by users"
+    }
+  }
+}

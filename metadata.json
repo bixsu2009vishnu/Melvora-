@@ -1,0 +1,6 @@
+{
+  "name": "Melvora",
+  "description": "Modern, premium music streaming web application built with React, Tailwind CSS, and Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Font Family Overrides */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Redefine Zinc to Premium Deep Black Palette */
+  --color-zinc-950: #050505; /* Primary Background */
+  --color-zinc-900: #0D0D0D; /* Secondary Background */
+  --color-zinc-800: #151515; /* Cards */
+  --color-zinc-700: #1C1C1C; /* Card Hover/Focus */
+  --color-zinc-600: #2C2C2C; /* Borders/Muted controls */
+  --color-zinc-400: #B8B8B8; /* Secondary Text */
+  --color-zinc-500: #888888;
+  --color-zinc-100: #FFFFFF; /* Primary Text */
+
+  /* Map purple to Red Crimson Palette Matching the Melvora Logo */
+  --color-purple-300: #FF5E5E;
+  --color-purple-400: #FF3B3B; /* Glow Red */
+  --color-purple-500: #FF1E1E; /* Accent Red */
+  --color-purple-600: #C70000; /* Secondary Red */
+  --color-purple-700: #9E0000;
+  --color-purple-800: rgba(255, 30, 30, 0.2);
+  --color-purple-900: rgba(199, 0, 0, 0.25);
+  --color-purple-950: #0D0202;
+
+  /* Additional Crimson theme tokens */
+  --color-brand-red: #FF1E1E;
+  --color-brand-red-sec: #C70000;
+  --color-brand-glow: #FF3B3B;
+  --color-brand-bg: #050505;
+  --color-brand-bg-sec: #0D0D0D;
+  --color-brand-card: #151515;
+  --color-brand-border: rgba(255, 0, 0, 0.18);
+
+  /* Radius Overrides for Premium Rounded Look (16px to 24px) */
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+
+  /* Glow Shadows */
+  --shadow-red-glow: 0 0 15px rgba(255, 30, 30, 0.45);
+  --shadow-red-glow-strong: 0 0 30px rgba(255, 30, 30, 0.75);
+  --shadow-red-glow-soft: 0 0 8px rgba(255, 30, 30, 0.18);
+}
+
+/* Custom styles for high-end Melvora aesthetic */
+@layer base {
+  body {
+    background-color: #050505;
+    color: #FFFFFF;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(199, 0, 0, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(255, 30, 30, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(15, 15, 15, 0.5) 0px, transparent 100%);
+    background-attachment: fixed;
+  }
+
+  /* Custom Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1C1C1C;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF1E1E;
+    box-shadow: 0 0 8px #FF1E1E;
+  }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(21, 21, 21, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 30, 30, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 30, 30, 0.35);
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(255, 30, 30, 0.15);
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Crimson Glow animations */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(255, 30, 30, 0.6), 0 0 12px rgba(255, 30, 30, 0.3);
+    box-shadow: 0 0 10px rgba(255, 30, 30, 0.15);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255, 30, 30, 0.95), 0 0 20px rgba(255, 30, 30, 0.6);
+    box-shadow: 0 0 25px rgba(255, 30, 30, 0.45);
+  }
+}
+
+.neon-glow-text {
+  color: #FFFFFF;
+  text-shadow: 0 0 8px rgba(255, 30, 30, 0.8), 0 0 15px rgba(255, 30, 30, 0.4);
+}
+
+.neon-glow-btn {
+  box-shadow: 0 0 15px rgba(255, 30, 30, 0.35);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neon-glow-btn:hover {
+  box-shadow: 
+    0 0 25px rgba(255, 30, 30, 0.65),
+    0 0 5px rgba(255, 30, 30, 0.9);
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Subtle Animated Red Particles for futuristic ambient feel */
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse at 50% 50%, rgba(255, 30, 30, 0.03) 0%, transparent 80%),
+    linear-gradient(rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Audio Waveform Animation */
+@keyframes waveAnim {
+  0%, 100% {
+    height: 12px;
+  }
+  50% {
+    height: 48px;
+  }
+}
+
+.wave-bar {
+  animation: waveAnim 1.2s ease-in-out infinite;
+}
+
+/* Micro interaction active states */
+.active-tab-glow {
+  box-shadow: 0 0 15px rgba(255, 30, 30, 0.5);
+  border-color: #FF1E1E;
+}
+
+/* Fluid Typography using clamp() */
+.font-clamp-h1 {
+  font-size: clamp(2.25rem, 5.5vw + 0.5rem, 4.75rem);
+}
+.font-clamp-h2 {
+  font-size: clamp(1.5rem, 3.5vw + 0.25rem, 2.75rem);
+}
+.font-clamp-body {
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 1.125rem);
+}
+
+/* High Contrast Accessibility Theme */
+.high-contrast {
+  --color-zinc-950: #000000 !important;
+  --color-zinc-900: #000000 !important;
+  --color-zinc-800: #111111 !important;
+  --color-zinc-700: #1a1a1a !important;
+  --color-zinc-650: #222222 !important;
+  --color-zinc-600: #ffffff !important;
+  --color-zinc-500: #ffffff !important;
+  --color-zinc-400: #ffffff !important;
+  --color-zinc-100: #ffffff !important;
+
+  --color-purple-300: #ffffff !important;
+  --color-purple-400: #ff0000 !important;
+  --color-purple-500: #ff0000 !important;
+  --color-purple-600: #ff0000 !important;
+  --color-purple-700: #ff0000 !important;
+  --color-purple-800: rgba(255, 255, 255, 0.3) !important;
+  --color-purple-900: rgba(255, 255, 255, 0.4) !important;
+  --color-purple-950: #000000 !important;
+
+  --color-brand-red: #ff0000 !important;
+  --color-brand-red-sec: #ff0000 !important;
+  --color-brand-glow: #ff0000 !important;
+  --color-brand-border: #ffffff !important;
+}
+
+.high-contrast .glass-card {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+.high-contrast button, 
+.high-contrast input, 
+.high-contrast select, 
+.high-contrast textarea {
+  border: 2px solid #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+}
+
+.high-contrast button:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ff0000 !important;
+}
+
+.high-contrast * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.high-contrast .wave-bar {
+  animation: none !important;
+  height: 24px !important;
+  background: #ffffff !important;
+}
+
+/* Accessibility Text Scaling Zoom */
+html.text-scale-large {
+  font-size: 18px !important;
+}
+html.text-scale-xlarge {
+  font-size: 20px !important;
+}
+
+
